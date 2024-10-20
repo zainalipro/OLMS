@@ -1,0 +1,15 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Library Management System{% endblock %}
+{% block css %}{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h2>Contact Us</h2>
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+{% block title %}Message Detail{% endblock %}
+{% block css %}{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h2>Message Detail</h2>
+    <h4>Name: {{ message.name }}</h4>
+    <h4>Email: {{ message.email }}</h4>
+    <h4>Subject: {{ message.subject }}</h4>
+    <h4>Message:</h4>
+    <p>{{ message.message }}</p>
+    <p><strong>Sent on:</strong> {{ message.created_at }}</p>
+    <a href="{% url 'view_contact_messages' %}" class="btn btn-secondary">Back to Messages</a>
+</div>
+{% endblock %}

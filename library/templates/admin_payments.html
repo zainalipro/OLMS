@@ -1,0 +1,44 @@
+{% extends 'admin_navbar.html' %} <!-- Replace with your actual admin base template -->
+{% load static %}
+{% block title %}Student Payments{% endblock %}
+{% block css %}
+<!-- Add any specific CSS styles here -->
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1>Student Payments</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Total Payments</h5>
+            <p class="card-text">Total Amount: Rs {{ total_payments|floatformat:2 }}</p>
+        </div>
+    </div>
+    
+    {% if payments %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Book Name</th>
+                <th>Amount</th>
+                <th>Payment Date</th>
+                <th>Card Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+                <td>{{ payment.book_request.student.user.get_full_name }}</td>
+                <td>{{ payment.book_request.book.name }}</td>
+                <td>Rs {{ payment.book_price|floatformat:2 }}</td>
+                <td>{{ payment.created_at }}</td>
+                <td>{{ payment.card_number }}</td>  <!-- Consider masking this for security -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No payments found.</p>
+    {% endif %}
+</div>
+{% endblock %}

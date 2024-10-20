@@ -1,0 +1,33 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+{% block title %}Contact Messages{% endblock %}
+{% block css %}{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h2>Contact Messages</h2>
+    {% if messages %}
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                    <tr>
+                        <td><a href="{% url 'contact_message_detail' message.id %}">{{ message.name }}</a></td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.subject }}</td>
+                        <td>{{ message.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No messages found.</p>
+    {% endif %}
+</div>
+{% endblock %}

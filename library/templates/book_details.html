@@ -1,0 +1,21 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+
+{% block title %}{{ book.name }} Details{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">{{ book.name }}</h1>
+    <div class="text-center">
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" alt="{{ book.name }} cover" style="max-width: 300px; max-height: 400px;">
+        {% else %}
+            <img src="{% static 'path/to/default_image.jpg' %}" alt="No cover available" style="max-width: 300px; max-height: 400px;">
+        {% endif %}
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Category:</strong> {{ book.category }}</p>
+        <a href="{{ book.pdf_file.url }}" target="_blank" class="btn btn-primary">Read Book</a>
+    </div>
+</div>
+{% endblock %}

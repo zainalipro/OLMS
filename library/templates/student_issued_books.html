@@ -1,0 +1,57 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% block title %} All Issued Books {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1>Issued Books</h1>
+
+    <form method="GET" class="mb-3">
+        <input type="text" name="search" placeholder="Search by book name" value="{{ search_query }}" class="form-control" />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
+    <p>Total Issued Books: {{ li|length }}</p>
+
+    {% if li %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Book ID</th>
+                    <th>Issued Date</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in li %}
+                <tr>
+                    <td>{{ item.student_id }}</td>
+                    <td>{{ item.student_name }}</td>
+                    <td>
+                        {% if item.is_expired %}
+                            <span>{{ item.book_name }}</span>
+                        {% else %}
+                            <a href="{% url 'book_details' item.book_id %}">{{ item.book_name }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.book_id }}</td>
+                    <td>{{ item.issued_date }}</td>
+                    <td>{{ item.expiry_date }}</td>
+                    <td>{{ item.is_expired|yesno:"Expired, Active" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No issued books found.</p>
+    {% endif %}
+</div>
+{% endblock %}

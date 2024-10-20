@@ -1,0 +1,15 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the issued book with ID {{ issued_book.id }}?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'view_issued_book' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

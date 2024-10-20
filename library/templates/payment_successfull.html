@@ -1,0 +1,31 @@
+{% extends 'student_navbar.html' %}
+{% block title %}Payment Successful{% endblock %}
+{% block css %}
+<style>
+    .success-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+    }
+    .success-card h1 {
+        color: #28a745;  /* Success color */
+    }
+    .success-card p {
+        font-size: 1.2em;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="success-card">
+        <h1>Payment Successful!</h1>
+        <p>Your book request has been approved.</p>
+        <p>Thank you for your payment.</p>
+        <a href="{% url 'student_issued_books' %}" class="btn btn-primary">Go to All Books</a>
+    </div>
+</div>
+{% endblock %}

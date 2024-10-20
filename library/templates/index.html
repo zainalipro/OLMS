@@ -1,0 +1,49 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+<style>
+    .hero {
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-weight: bold;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+    .btn-lg {
+        margin: 10px;
+    }
+    .icon {
+        width: 100px;
+        height: auto;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="hero">
+        <h1 class="display-5">Welcome to My Online Library</h1>
+        <p class="lead">Join our community to explore a wide range of books. Register as a student and gain access to our library resources.</p>
+        <a href="/student_registration/" class="btn btn-primary btn-lg">Register as Student</a>
+    </div>
+    <br>
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <img src="{% static 'admin.png' %}" class="icon" alt="Admin Icon">
+            <br>
+            <a class="btn btn-outline-primary btn-lg" href="/admin_login/">Admin Login</a>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'students.png' %}" class="icon" alt="Student Icon">
+            <br>
+            <a class="btn btn-outline-primary btn-lg" href="/student_login/">Student Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% block title %}Payment Page{% endblock %}
+{% block css %}
+<style>
+    .payment-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+    }
+    .payment-card img {
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Payment for {{ book_request.book.name }}</h1>
+    <div class="payment-card">
+        <img src="{{ book_request.book.cover_image.url }}" alt="{{ book_request.book.name }} cover" class="img-fluid">
+        <p><strong>Author:</strong> {{ book_request.book.author }}</p>
+        <p><strong>Price:</strong> ${{ book_request.book.price|floatformat:2 }}</p>  <!-- Show book price -->
+        <p class="text-danger"><strong>You are paying:</strong> ${{ book_request.book.price|floatformat:2 }}</p>  <!-- Notify payment amount -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="card_number" class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="card_number" name="card_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="expiry_date" class="form-label">Expiry Date</label>
+                <input type="date" class="form-control" id="expiry_date" name="expiry_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="number" class="form-control" id="cvv" name="cvv" min="100" max="999" required>  <!-- Adjust min/max for CVV -->
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Pay</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

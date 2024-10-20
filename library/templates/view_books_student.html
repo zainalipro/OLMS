@@ -1,0 +1,50 @@
+{% extends 'student_navbar.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Library Management System{% endblock %}
+{% block css %}{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center"><u>All Books List</u></h1>
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr>
+                <th>Sr. No</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>ISBN Number</th>
+                <th>Category</th>
+                <th>Price</th>  <!-- New Price Column -->
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.category }}</td>
+                <td>Rs {{ book.price|floatformat:2 }}</td>  <!-- Display Price -->
+                <td>
+                {% if request_status|get_item:book.id == 'Approved' %}
+                    <span class="badge bg-success text-white">{{ request_status|get_item:book.id }}</span>
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="book_id" value="{{ book.id }}">
+                        <button type="submit" class="btn btn-warning btn-sm">Request</button>
+                    </form>
+                {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No books available.</td>  <!-- Adjust colspan -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
